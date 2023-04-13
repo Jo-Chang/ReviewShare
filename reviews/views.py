@@ -96,3 +96,11 @@ def comment_delete(request, review_pk, comment_pk):
         comment.delete()
     return redirect('reviews:detail', review_pk)
     
+    
+@login_required
+def profile(request):
+    reviews = Review.objects.filter(user=request.user)
+    context = {
+        'reviews': reviews,
+    }
+    return render(request, 'reviews/profile.html', context)

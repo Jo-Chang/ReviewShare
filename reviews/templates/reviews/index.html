@@ -1,6 +1,8 @@
 {% extends 'base.html' %} {% block content %}
 <h1>INDEX</h1>
-<h3 class="text-secondary">{{ request.user }}님, 안녕하세요!</h3>
+<h3 class="text-secondary">
+  <a href="{% url 'reviews:profile' %}">{{ request.user }}</a>님, 안녕하세요!
+</h3>
 {% if request.user.is_authenticated %}
 {# Login 됐을 경우에 #}
 <form action="{% url 'accounts:logout' %}" method="post" class="">
@@ -18,9 +20,9 @@
 {% endif %}
 
 {% for review in reviews  %}
-<a href="{% url 'reviews:detail' review.pk %}">제목: {{ review.title}}</a>
-<p>영화: {{ review.movie}}</p>
-<p>작성자: {{ review.user}}</p>
+<a href="{% url 'reviews:detail' review.pk %}">제목: {{ review.title }}</a>
+<p>영화: {{ review.movie }}</p>
+<p>작성자: {{ review.user }}</p>
 <hr>
 {% endfor %}
 <a href="{% url 'reviews:create' %}">CREATE</a>

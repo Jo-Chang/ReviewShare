@@ -20,13 +20,15 @@
 </form>
 
 {% for comment in comments %}
-<p>글쓴이: {{comment.content}}</p>
-<p>댓글 내용: {{comment.user}}</p>
+<p>글쓴이: {{ comment.content }}</p>
+<p>댓글 내용: {{ comment.user }}</p>
 
+{% if request.user == comment.user %}
 <form action="{% url 'reviews:comment_delete' review.pk comment.pk %}" method="post">
   {% csrf_token %}
   <input type="submit" value="삭제">
 </form>
+{% endif %}
 
 <hr>
 {% endfor %}
