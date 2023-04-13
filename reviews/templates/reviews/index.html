@@ -1,4 +1,10 @@
 {% extends 'base.html' %} {% block content %}
 <h1>INDEX</h1>
+
+{% for review in reviews  %}
+<a href="{% url 'reviews:detail' review.pk %}">제목: {{ review.title}}</a>
+<p>영화: {{ review.movie}}</p>
+<hr>
+{% endfor %}
 <a href="{% url 'reviews:create' %}">CREATE</a>
 {% endblock content %}

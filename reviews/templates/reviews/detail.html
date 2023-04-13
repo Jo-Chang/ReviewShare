@@ -1,4 +1,8 @@
 {% extends 'base.html' %} {% block content %}
 <h1>DETAIL</h1>
 
+<p>제목: {{ review.title }}</p>
+<p>내용: {{ review.content }}</p>
+<p>영화: {{ review.movie }}</p>
+<a href="{% url 'reviews:index' %}">back</a>
 {% endblock content %}
