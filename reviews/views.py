@@ -39,4 +39,26 @@ def create(request):
     }
     
     return render(request, 'reviews/create.html', context)
+
+
+def delete(request, review_pk):
+    review = Review.objects.get(pk=review_pk)
+    review.delete()
+    return redirect('reviews:index')
+
+
+def update(request, review_pk):
+    review = Review.objects.get(pk=review_pk)
+    if request.method == "POST":
+        form = ReviewForm(request.POST, instance=review)
+        if form.is_valid():
+            review = form.save()
+            return redirect('reviews:detail', review.pk)
+    else:
+        form = ReviewForm(instance=review)
         
+    context = {
+        'review': review,
+        'form': form,
+    }
+    return render(request, 'reviews/create.html', context)

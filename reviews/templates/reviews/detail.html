@@ -5,4 +5,9 @@
 <p>내용: {{ review.content }}</p>
 <p>영화: {{ review.movie }}</p>
 <a href="{% url 'reviews:index' %}">back</a>
+<a href="{% url 'reviews:update' review.pk %}">update</a>
+<form action="{% url 'reviews:delete' review.pk %}" method="post">
+  {% csrf_token %}
+  <input type="submit" value="삭제">
+</form>
 {% endblock content %}
