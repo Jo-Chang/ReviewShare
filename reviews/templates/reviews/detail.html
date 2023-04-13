@@ -10,4 +10,22 @@
   {% csrf_token %}
   <input type="submit" value="삭제">
 </form>
+
+<form action="{% url 'reviews:comment_create' review.pk %}" method="post">
+  {% csrf_token %}
+  {{ comment_form.as_p }}
+  <input type="submit">
+</form>
+
+{% for comment in comments %}
+<p>{{comment.content}}</p>
+
+<form action="{% url 'reviews:comment_delete' review.pk comment.pk %}" method="post">
+  {% csrf_token %}
+  <input type="submit" value="삭제">
+</form>
+
+<hr>
+{% endfor %}
+
 {% endblock content %}
