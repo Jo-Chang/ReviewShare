@@ -20,6 +20,7 @@
 {% for review in reviews  %}
 <a href="{% url 'reviews:detail' review.pk %}">제목: {{ review.title}}</a>
 <p>영화: {{ review.movie}}</p>
+<p>작성자: {{ review.user}}</p>
 <hr>
 {% endfor %}
 <a href="{% url 'reviews:create' %}">CREATE</a>
