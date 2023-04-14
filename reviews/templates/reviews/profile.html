@@ -1,37 +1,37 @@
 {% extends 'base.html' %}
-</style>
+
 {% block content %}
-  <h1 class="text-center fs-3">{{ request.user }}의 페이지</h1>
+  
   
   <section class="vh-100" style="background-color: #f4f5f7;">
-    <div class="container py-5 h-100">
-      <div class="row d-flex justify-content-center align-items-center h-100">
-        <div class="col col-lg-6 mb-4 mb-lg-0">
-          <div class="card mb-3" style="border-radius: .5rem;">
-            <div class="row g-0">
-              <div class="col-md-4 gradient-custom text-center text-white"
-                style="border-top-left-radius: .5rem; border-bottom-left-radius: .5rem;">
-                <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp"
-                  alt="Avatar" class="img-fluid my-5" style="width: 80px;" />
-                <h5>{{ request.user }}</h5>
-                
-                <i class="far fa-edit mb-5"></i>
-              </div>
-              <div class="col-md-8">
-                <div class="card-body p-4">
-                  <h6>Information</h6>
-                  <hr class="mt-0 mb-4">
-                  <div class="row pt-1">
-                    <div class="col-6 mb-3">
-                      <h6>Email</h6>
-                      <p class="text-muted">
-                          {% if request.user.email %}
-                            {{ request.user.email }}
-                          {% else %}
-                            <span class="text-secondary">이메일이 없습니다.</span>
-                          {% endif %}
-                        </p>
-                    </div>
+    <h1 class="text-center fs-3">{{ request.user }}의 페이지</h1>
+      <div class="container py-5 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+          <div class="col col-lg-6 mb-4 mb-lg-0">
+            <div class="card mb-3" style="border-radius: .5rem;">
+              <div class="row g-0">
+                <div class="col-md-4 gradient-custom text-center"
+                  style="border-top-left-radius: .5rem; border-bottom-left-radius: .5rem;">
+                  <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp"
+                    alt="Avatar" class="img-fluid my-4" style="width: 80px;">
+                  <h5>{{ request.user }}</h5>                
+                  <a href="{% url 'accounts:login' %}"><i class="far fa-edit mb-5"></i></a>
+                </div>
+                <div class="col-md-8">
+                  <div class="card-body p-4">
+                    <h6>Information</h6>
+                    <hr class="mt-0 mb-4">
+                    <div class="row pt-1">
+                      <div class="col-6 mb-3">
+                        <h6>Email</h6>
+                        <p class="text-muted">
+                            {% if request.user.email %}
+                              {{ request.user.email }}
+                            {% else %}
+                              <span class="text-secondary">이메일이 없습니다.</span>
+                            {% endif %}
+                          </p>
+                      </div>
                     <div class="col-6 mb-3">
                       <h6>First Name / Last Name</h6>
                       <p class="text-muted"> 
@@ -48,41 +48,31 @@
                       </p>
                     </div>
                   </div>
-                  <h6>comments</h6>
+                  <h6>Comments</h6>
                   <hr class="mt-0 mb-4">
                   <div class="row pt-1">
-                    <div class="col-6 mb-3">
-                      <h6>...</h6>
-                      <p class="text-muted">...</p>
-                    </div>
-                    <div class="col-6 mb-3">
-                      <h6>...</h6>
-                      <p class="text-muted">...</p>
-                    </div>
+                    <div class="col mb-3">
+                      <h6>
+                       {% for review in reviews  %}
+                       <p><a href="{% url 'reviews:detail' review.pk %}">[{{ review.movie }}] : {{ review.title }}</a></p>                                            
+                       {% endfor %}                                                                                
+                      </h6>                      
+                    </div>                  
                   </div>
-                  <div class="d-flex justify-content-start">
-                    <a href="#!"><i class="fab fa-facebook-f fa-lg me-3"></i></a>
-                    <a href="#!"><i class="fab fa-twitter fa-lg me-3"></i></a>
-                    <a href="#!"><i class="fab fa-instagram fa-lg"></i></a>
+                  <div class="d-flex ">
+                    <a href="https://ko-kr.facebook.com/"><i class="fab fa-facebook-f fa-lg me-3"></i></a>
+                    <a href="https://twitter.com/?lang=ko"><i class="fab fa-twitter fa-lg me-3"></i></a>
+                    <a href="https://www.instagram.com/"><i class="fab fa-instagram fa-lg"></i></a>
                   </div>
                 </div>
               </div>
             </div>
           </div>
+            <div class="text-center">
+              <a href="{% url 'reviews:index' %}">back</a>
+            </div>
         </div>
-      </div>
+      </div>      
     </div>
   </section>
-
-  <hr>
-  {% for review in reviews %}
-    <a href="{% url 'reviews:detail' review.pk %}">제목: {{ review.title}}</a>
-    <p>영화: {{ review.movie }}</p>
-    <p>작성자: {{ review.user }}</p>
-    <hr>
-  {% endfor %}
-
-<div class="text-center">
-  <a href="{% url 'reviews:index' %}">back</a>
-</div>
-{% endblock content %}
+{% endblock content %}             
