@@ -109,27 +109,31 @@
 </p>
 
 <a href="{% url 'reviews:index' %}">back</a>
+
+{% if request.user == review.user %}
 <a href="{% url 'reviews:update' review.pk %}">update</a>
 <form action="{% url 'reviews:delete' review.pk %}" method="post">
   {% csrf_token %}
   <input type="submit" value="삭제" />
 </form>
-
+{% endif %}
 <form action="{% url 'reviews:comment_create' review.pk %}" method="post">
   {% csrf_token %} {{ comment_form.as_p }}
   <input type="submit" />
 </form>
 
 {% for comment in comments %}
-<p>{{comment.content}}</p>
+<p>글쓴이: {{ comment.content }}</p>
+<p>댓글 내용: {{ comment.user }}</p>
 
-<form
-  action="{% url 'reviews:comment_delete' review.pk comment.pk %}"
-  method="post"
->
+
+{% if request.user == comment.user %}
+<form action="{% url 'reviews:comment_delete' review.pk comment.pk %}" method="post">
+
   {% csrf_token %}
   <input type="submit" value="삭제" />
 </form>
+{% endif %}
 
 <hr />
 {% endfor %} {% endblock content %}
