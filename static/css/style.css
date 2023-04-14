@@ -5,6 +5,12 @@
 }
 
 #sidebar {
-  min-width: 10rem;
-  height: 20rem;
+  position: fixed;
+  min-width: 13rem;
+  min-height: 40rem;
+  height: 70%;
+}
+
+main {
+  margin-left: 14rem;
 }

@@ -18,6 +18,7 @@ def index(request):
 def redirect_index(request):
     return redirect('reviews:index')
 
+
 def detail(request, review_pk):
     review = Review.objects.get(pk=review_pk)
     comments = review.comment_set.all()
