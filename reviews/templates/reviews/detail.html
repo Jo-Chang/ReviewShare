@@ -1,10 +1,112 @@
-{% extends 'base.html' %} {% block content %}
+{% extends 'base.html' %} {% block content %} {% load static %}
 <h1>DETAIL</h1>
 
 <p>제목: {{ review.title }}</p>
 <p>내용: {{ review.content }}</p>
 <p>영화: {{ review.movie }}</p>
-<p>평점: {{ review.score }}</p>
+<p>
+  평점: {% if review.score == 5 %}
+  <img
+    class="d-inline"
+    style="width: 25px"
+    src="{% static 'star.png' %}"
+    alt=""
+  />
+  <img
+    class="d-inline"
+    style="width: 25px"
+    src="{% static 'star.png' %}"
+    alt=""
+  />
+  <img
+    class="d-inline"
+    style="width: 25px"
+    src="{% static 'star.png' %}"
+    alt=""
+  />
+  <img
+    class="d-inline"
+    style="width: 25px"
+    src="{% static 'star.png' %}"
+    alt=""
+  />
+  <img
+    class="d-inline"
+    style="width: 25px"
+    src="{% static 'star.png' %}"
+    alt=""
+  />
+
+  {% elif review.score == 4 %}
+  <img
+    class="d-inline"
+    style="width: 25px"
+    src="{% static 'star.png' %}"
+    alt=""
+  />
+  <img
+    class="d-inline"
+    style="width: 25px"
+    src="{% static 'star.png' %}"
+    alt=""
+  />
+  <img
+    class="d-inline"
+    style="width: 25px"
+    src="{% static 'star.png' %}"
+    alt=""
+  />
+  <img
+    class="d-inline"
+    style="width: 25px"
+    src="{% static 'star.png' %}"
+    alt=""
+  />
+
+  {% elif review.score == 3 %}
+  <img
+    class="d-inline"
+    style="width: 25px"
+    src="{% static 'star.png' %}"
+    alt=""
+  />
+  <img
+    class="d-inline"
+    style="width: 25px"
+    src="{% static 'star.png' %}"
+    alt=""
+  />
+  <img
+    class="d-inline"
+    style="width: 25px"
+    src="{% static 'star.png' %}"
+    alt=""
+  />
+
+  {% elif review.score == 2 %}
+  <img
+    class="d-inline"
+    style="width: 25px"
+    src="{% static 'star.png' %}"
+    alt=""
+  />
+  <img
+    class="d-inline"
+    style="width: 25px"
+    src="{% static 'star.png' %}"
+    alt=""
+  />
+
+  {% else %}
+  <img
+    class="d-inline"
+    style="width: 25px"
+    src="{% static 'star.png' %}"
+    alt=""
+  />
+
+  {% endif %}
+</p>
 
 <a href="{% url 'reviews:index' %}">back</a>
 <a href="{% url 'reviews:update' review.pk %}">update</a>
