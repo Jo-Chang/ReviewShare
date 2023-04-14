@@ -1,7 +1,9 @@
 {% extends 'base.html' %} {% block content %}
-<h1>CREATE</h1>
-<form action="{% url 'reviews:create' %}" method="POST">
-  {% csrf_token %} {{form.as_p}}
+<h1 class="fw-bold mb-3">CREATE</h1>
+
+<form action="{% url 'reviews:create' %}" method="POST" class="custom-input-form">
+  {% csrf_token %} 
+  {{ form.as_p }}
   <input type="submit" />
 </form>
 
