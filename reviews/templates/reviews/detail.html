@@ -4,28 +4,30 @@
 <p>제목: {{ review.title }}</p>
 <p>내용: {{ review.content }}</p>
 <p>영화: {{ review.movie }}</p>
+<p>평점: {{ review.score }}</p>
+
 <a href="{% url 'reviews:index' %}">back</a>
 <a href="{% url 'reviews:update' review.pk %}">update</a>
 <form action="{% url 'reviews:delete' review.pk %}" method="post">
   {% csrf_token %}
-  <input type="submit" value="삭제">
+  <input type="submit" value="삭제" />
 </form>
 
 <form action="{% url 'reviews:comment_create' review.pk %}" method="post">
-  {% csrf_token %}
-  {{ comment_form.as_p }}
-  <input type="submit">
+  {% csrf_token %} {{ comment_form.as_p }}
+  <input type="submit" />
 </form>
 
 {% for comment in comments %}
 <p>{{comment.content}}</p>
 
-<form action="{% url 'reviews:comment_delete' review.pk comment.pk %}" method="post">
+<form
+  action="{% url 'reviews:comment_delete' review.pk comment.pk %}"
+  method="post"
+>
   {% csrf_token %}
-  <input type="submit" value="삭제">
+  <input type="submit" value="삭제" />
 </form>
 
-<hr>
-{% endfor %}
-
-{% endblock content %}
+<hr />
+{% endfor %} {% endblock content %}
